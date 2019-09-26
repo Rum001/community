@@ -20,13 +20,12 @@ public class PublishController {
     @Autowired
     private QuestionService questionService;
 
-
-    @GetMapping("/")
+    @GetMapping("/publish")
     public String publish(){
         return "publish";
     }
 
-    @PostMapping("publishComment")
+    @PostMapping("/publishComment")
     public String publishComment(@RequestParam(name = "title",required = false)String title, @RequestParam(name = "description",required = false)String description,
                                  @RequestParam(name = "tag",required = false)String tag, HttpServletRequest request, Model model
                                  ){
@@ -35,12 +34,15 @@ public class PublishController {
         model.addAttribute("description",description);
         if (title==null||title==""){
             model.addAttribute("error","标题不能为空");
+            return "publish";
         }
         if (tag==null||tag==""){
             model.addAttribute("error","标签不能为空");
+            return "publish";
         }
         if (description==null||description==""){
             model.addAttribute("error","描述不能为空");
+            return "publish";
         }
         Question question = new Question();
         //从session中获取用户信息
