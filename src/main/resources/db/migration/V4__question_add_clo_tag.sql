@@ -1,0 +1,1 @@
+alter table question add tag varchar(200)

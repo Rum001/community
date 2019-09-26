@@ -8,6 +8,6 @@ public class User {
     private String name;
     private String accountId;
     private String token;
-    private String gmtCreate;
-    private String gmtModified;
+    private String createTime;
+    private String updateTime;
 }

@@ -5,6 +5,7 @@
     <title>码匠社区</title>
 </head>
 <link rel="stylesheet" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="css/community.css"/>
 
 <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
 <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
@@ -40,8 +41,37 @@
                     </ul>
                 </li>
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div>
 </nav>
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发起</h2>
+            <hr/>
+            <form action="/publish/publishComment" method="post">
+                <div class="form-group">
+                    <label for="title">问题标题 (简单扼要)</label>
+                    <input type="text" th:value="${title}" class="form-control" name="title" id="title" placeholder="问题标题....">
+                </div>
+                <div class="form-group">
+                    <label for="description">问题补充 (必填,请参考右侧提示)</label>
+                    <textarea class="form-control" th:value="${description}" name="description" id="description" rows="25"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tag">添加标签</label>
+                    <input type="text" class="form-control" th:value="${tag}" name="tag" id="tag" placeholder="输入标签 以,号隔开">
+                </div>
+                <button type="submit" class="btn btn-success btn-publish">发布</button>
+            </form>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h3>问题发起指南</h3>
+            ................................
+            ................................
+            ................................
+        </div>
+    </div>
+</div>
 </body>
 </html>

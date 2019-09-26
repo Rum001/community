@@ -18,4 +18,14 @@ public class UserServiceImpl implements UserService {
     public void insert(User user) throws Exception {
         userMapper.insert(user);
     }
+
+    @Override
+    public User findUserByAccountId(String accountId) throws Exception {
+        return userMapper.findUserByAccountId(accountId);
+    }
+
+    @Override
+    public User findUserByToken(String token) throws Exception {
+        return userMapper.findUserByToken(token);
+    }
 }
