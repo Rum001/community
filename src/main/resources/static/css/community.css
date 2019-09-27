@@ -10,3 +10,12 @@ body{
     float: right;
     margin-bottom: 15px;
 }
+.text-color{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
+.image-size{
+    height: 38px;
+    width: 38px;
+}
