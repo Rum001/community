@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${question.title}">码匠社区</title>
+</head>
+<body>
+<div th:replace="header.html"></div>
+<div class="container-fluid main action">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h3><span class="glyphicon" aria-hidden="true" th:text="${question.title}"></span></h3>
+            <span class="text-color">
+                作者： <span th:text="${question.user.name}"></span> | 发布时间： <span th:text="${#dates.format(question.createTime,'yyyy-MM-dd')}"></span>| 阅读数： <span th:text="${question.viewCount}"></span> </span>
+            <hr/>
+            <span th:text="${question.description}" style="font-size: 14px"></span>
+            <hr/>
+            <a href="#" class="common-edit"><span class="glyphicon glyphicon-pencil"></span>编辑</a>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <div><h3>发起人</h3></div>
+            <div><h3>相关问题</h3></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

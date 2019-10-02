@@ -2,52 +2,48 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>码匠社区</title>
+    <title th:text="${actionName}">码匠社区</title>
 </head>
 <body>
 <div th:replace="header.html"></div>
-<div class="container-fluid main">
+<div class="container-fluid main action">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-            <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span>发现</h2>
+            <h2><span class="glyphicon " aria-hidden="true" th:text="${actionName}"></span></h2>
             <hr/>
-            <div class="alert alert-danger alert-dismissible" role="alert" th:if="${error} ne null">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <strong>Error</strong> <span th:text="${error}"></span>
-            </div>
-            <div class="media" th:each="question : ${questionList}">
+            <div class="media" th:if="${action} eq questions" th:each="question : ${questionList}">
                 <div class="media-left">
                     <a href="#">
                         <img class="media-object image-size" th:src="${question.user.avatarUrl}" >
                     </a>
                 </div>
                 <div class="media-body">
-                    <a th:href="@{'/question/'+${question.id}}"><h4 class="media-heading" th:text="${question.title}"></h4></a>
+                    <h4 class="media-heading" th:text="${question.title}"></h4>
                     <span th:text="${question.description}"></span> <span class="text-color"> <span th:text="${question.commentCount}"></span> 个回复 • <span th:text="${question.viewCount}"></span> 次浏览 • <span th:text="${#dates.format(question.createTime,'yyyy-MM-dd')}"></span></span>
                 </div>
             </div>
-            <nav aria-label="Page navigation">
+            <nav aria-label="Page navigation" th:if="${action} eq questions">
                 <ul class="pagination">
                     <li>
-                        <a th:href="@{'/?pageNum=1&pageSize='+${pagingDTO.pageSize}}" th:if="${pagingDTO.showFirstPage}" aria-label="Previous">
+                        <a th:href="@{'/profile/'+${action}+'?pageNum=1&pageSize='+${pagingDTO.pageSize}}" th:if="${pagingDTO.showFirstPage}" aria-label="Previous">
                             <span aria-hidden="true">&lt;&lt;</span>
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{'/?pageNum='+${pagingDTO.pageNum-1}+'&pageSize='+${pagingDTO.pageSize}}" th:if="${pagingDTO.showPrevious}" aria-label="Previous">
+                        <a th:href="@{'/profile/'+${action}+'?pageNum='+${pagingDTO.pageNum-1}+'&pageSize='+${pagingDTO.pageSize}}" th:if="${pagingDTO.showPrevious}" aria-label="Previous">
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
                     <li th:class="${pagingDTO.pageNum==paging}? 'active' : ''" th:each="paging : ${pagingDTO.pages}">
-                        <a th:href="@{'/?pageNum='+${paging}+'&pageSize='+${pagingDTO.pageSize}}"  th:text="${paging}"></a>
+                        <a th:href="@{'/profile/'+${action}+'?pageNum='+${paging}+'&pageSize='+${pagingDTO.pageSize}}"  th:text="${paging}"></a>
                     </li>
                     <li >
-                        <a th:href="@{'/?pageNum='+${pagingDTO.pageNum+1}+'&pageSize='+${pagingDTO.pageSize}}" th:if="${pagingDTO.showEndPage}" aria-label="Next">
+                        <a th:href="@{'/profile/'+${action}+'?pageNum='+${pagingDTO.pageNum+1}+'&pageSize='+${pagingDTO.pageSize}}" th:if="${pagingDTO.showEndPage}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
                     <li >
-                        <a th:href="@{'/?pageNum='+${pagingDTO.totalPage}+'&pageSize='+${pagingDTO.pageSize}}" th:if="${pagingDTO.showNext}" aria-label="Next">
+                        <a th:href="@{'/profile/'+${action}+'?pageNum='+${pagingDTO.totalPage}+'&pageSize='+${pagingDTO.pageSize}}" th:if="${pagingDTO.showNext}" aria-label="Next">
                             <span aria-hidden="true">&gt;&gt;</span>
                         </a>
                     </li>
@@ -55,10 +51,10 @@
             </nav>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h3>热门话题</h3>
-            ................................<br/>
-            ................................<br/>
-            ................................
+            <div class="list-group" style="margin-top: 35px">
+                <a href="/profile/questions" th:class="${action} eq questions ? 'list-group-item active':'list-group-item'">我的问题</a>
+                <a href="/profile/reply" th:class="${action} eq reply ? 'list-group-item active':'list-group-item' " >最新回复<span class="badge">4</span></a>
+            </div>
         </div>
     </div>
 </div>

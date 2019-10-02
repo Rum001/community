@@ -51,7 +51,7 @@ public class PublishController {
         question.setTitle(title);
         question.setDescription(description);
         question.setTag(tag);
-        question.setCreateTime(String.valueOf(System.currentTimeMillis()));
+        question.setCreateTime(System.currentTimeMillis());
         questionService.addQuestion(question);
         return "redirect:/";
     }

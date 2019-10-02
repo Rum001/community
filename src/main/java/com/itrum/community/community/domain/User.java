@@ -10,4 +10,5 @@ public class User {
     private String token;
     private String createTime;
     private String updateTime;
+    private String avatarUrl;
 }
