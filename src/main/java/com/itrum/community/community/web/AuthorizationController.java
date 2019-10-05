@@ -1,19 +1,16 @@
 package com.itrum.community.community.web;
 
-import com.itrum.community.community.domain.User;
 import com.itrum.community.community.dto.AccessTokenDTO;
 import com.itrum.community.community.dto.GithubUserDTO;
 import com.itrum.community.community.provider.GithubProvider;
 import com.itrum.community.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 

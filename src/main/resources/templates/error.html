@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>码匠社区</title>
+</head>
+<body>
+<div th:replace="header.html"></div>
+<div class="jumbotron" style="margin: 50px">
+    <h1>出错啦!!!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span th:if="${code} ne null" th:text="'状态码：'+${code}" style="color: red"></span></h1>
+    <p th:text="${message}"></p>
+    <p><a class="btn btn-primary btn-lg" href="/" role="button">去主页</a></p>
+</div>
+</body>
+</html>

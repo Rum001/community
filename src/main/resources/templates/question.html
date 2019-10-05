@@ -15,10 +15,24 @@
             <hr/>
             <span th:text="${question.description}" style="font-size: 14px"></span>
             <hr/>
-            <a href="#" class="common-edit"><span class="glyphicon glyphicon-pencil"></span>编辑</a>
+            <a th:href="@{'/question/editQuestion/'+${question.id}}" th:if="${session.user.id==question.creator} " class="common-edit"><span class="glyphicon glyphicon-pencil"></span>编辑</a>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <div><h3>发起人</h3></div>
+            <div>
+                <h3>发起人</h3>
+                <ul class="media-list">
+                    <li class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object image-size" th:src="${question.user.avatarUrl}" >
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading" th:text="${question.user.name}" ></h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
             <div><h3>相关问题</h3></div>
         </div>
     </div>

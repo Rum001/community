@@ -11,7 +11,9 @@ public interface QuestionService {
 
     List<Question> findAll(Integer pageNum, Integer pageSize);
 
-    List<Question> findQuestionListByUserId(Integer id, Integer pageNum, Integer pageSize);
+    List<Question> findQuestionListByUserId(Long id, Integer pageNum, Integer pageSize);
 
-    Question findQuestionById(Integer id);
+    Question findQuestionById(Long id);
+
+    void editQuestion(Question question);
 }

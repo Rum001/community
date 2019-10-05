@@ -1,7 +1,5 @@
 package com.itrum.community.community.interceptor;
 
-import com.itrum.community.community.domain.User;
-import com.itrum.community.community.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

@@ -2,7 +2,6 @@ package com.itrum.community.community.web;
 
 import com.github.pagehelper.PageInfo;
 import com.itrum.community.community.domain.Question;
-import com.itrum.community.community.domain.User;
 import com.itrum.community.community.dto.PagingDTO;
 import com.itrum.community.community.service.QuestionService;
 import com.itrum.community.community.service.UserService;
@@ -26,7 +25,7 @@ public class IndexController {
     private UserService userService;
 
     @GetMapping("/")
-    public String index(HttpServletRequest request, Model model, @RequestParam(name = "pageNum",defaultValue = "1")Integer pageNum,@RequestParam(name = "pageSize",defaultValue = "2")Integer pageSize) throws Exception{
+    public String index(HttpServletRequest request, Model model, @RequestParam(name = "pageNum",defaultValue = "1")Integer pageNum,@RequestParam(name = "pageSize",defaultValue = "5")Integer pageSize) throws Exception{
         //获取token 判断用户是否登录
         Cookie[] cookies = request.getCookies();
         if (cookies!=null){
