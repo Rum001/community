@@ -1,18 +1,22 @@
 package com.itrum.community.community;
 
-import com.github.pagehelper.PageInfo;
 import com.itrum.community.community.domain.Question;
+import com.itrum.community.community.domain.User;
+import com.itrum.community.community.dto.CommentDTO;
+import com.itrum.community.community.mapper.QuestionMapper;
+import com.itrum.community.community.mapper.UserMapper;
+import com.itrum.community.community.service.CommentService;
 import com.itrum.community.community.service.QuestionService;
-
+import com.itrum.community.community.service.UserService;
+import lombok.AllArgsConstructor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -21,56 +25,53 @@ public class CommunityApplicationTests {
     @Autowired
     private QuestionService questionService;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private QuestionMapper questionMapper;
+
+    @Autowired
+    private CommentService commentService;
+
     @Test
     public void contextLoads() {
-        List<Question> all = questionService.findAll(1,4);
-        PageInfo<Question> questionPageInfo = new PageInfo<>(all);
-        for (Question questionDTO : all) {
-            System.out.println(questionDTO);
+        User all = null;
+        try {
+            all = userService.findUserByToken("441bd239-e910-44b6-aca9-74b68c1b5689");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(all.getId());
+    }
+    @Test
+    public void addTest(){
+        Question question = new Question();
+        for (int i = 3; i < 33; i++) {
+            question.setCreator(1);
+            question.setTitle("标题"+i);
+            question.setCreateTime(System.currentTimeMillis());
+            question.setDescription("问题"+i);
+            question.setTag("标签"+i);
+            question.setViewCount(0L);
+            question.setUpdateTime(null);
+            question.setCommentCount(0L);
+            question.setLikeCount(0L);
+            questionMapper.insert(question);
         }
     }
-
     @Test
-    public void test2(){
-        List<Question> questionListByUserId = questionService.findQuestionListByUserId(2, 1, 2);
-        for (Question question : questionListByUserId) {
-            System.out.println(question);
+    public void idTest(){
+        Question questionById = questionService.findQuestionById(1L);
+        System.out.println(questionById);
+
+    }
+    @Test
+    public void dToTest(){
+        List<CommentDTO> commentByQuestionId = commentService.findCommentByQuestionId(1L,2);
+        for (CommentDTO commentDTO : commentByQuestionId) {
+            System.out.println(commentDTO);
         }
-    }
-    @Test
-    public void test3(){
-        Question question = questionService.findQuestionById(2);
-        System.out.println(question);
-    }
-
-
-    //    @Test
-//    public void test() {
-//        String str="Hello";
-//        FileWriter fs=null;
-//        try {
-//            fs=new FileWriter("c:\\hello.txt");
-//            fs.write(str);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }finally {
-//
-//        }
-//    }
-    @Test
-    public void test(){
-        Map<String,String> map =new HashMap<>();
-        map.put("dog1","123456");
-        map.put("dog1","123");
-        map.put("dog32","1234");
-        map.put("dog2","12345");
-
-        System.out.println(map.get("dog1"));
-//        Set<String> strings = map.keySet();
-//        for (String string : strings) {
-//            System.out.println(string);
-//
-//        }
 
     }
 

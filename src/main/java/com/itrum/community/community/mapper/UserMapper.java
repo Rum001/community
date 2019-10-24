@@ -2,8 +2,9 @@ package com.itrum.community.community.mapper;
 
 import com.itrum.community.community.domain.User;
 import com.itrum.community.community.domain.UserExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserMapper {
     /**

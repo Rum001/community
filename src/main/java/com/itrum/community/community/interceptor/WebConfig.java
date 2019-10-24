@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
         //配置拦截的路径
         ir.addPathPatterns("/**");
         //配置不被拦截的路径
-        ir.excludePathPatterns("/","/static/**","/callback","/question");
+        ir.excludePathPatterns("/","/static/**","/callback","/question/*");
     }
 
     @Override

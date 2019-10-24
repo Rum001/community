@@ -1,13 +1,13 @@
 package com.itrum.community.community.service;
 
 import com.itrum.community.community.domain.Question;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 public interface QuestionService {
 
     void addQuestion(Question question);
-
 
     List<Question> findAll(Integer pageNum, Integer pageSize);
 
@@ -16,4 +16,6 @@ public interface QuestionService {
     Question findQuestionById(Long id);
 
     void editQuestion(Question question);
+
+    void addViewCount(Question question);
 }

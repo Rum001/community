@@ -28,7 +28,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void addQuestion(Question question) {
        if (questionMapper.insertSelective(question)==0){
-           throw new CommunityException(ExceptionEnum.);
+           throw new CommunityException(ExceptionEnum.QUESTION_SAVE_FAILING);
        }
     }
 
@@ -60,7 +60,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public Question findQuestionById(Long id) {
         Question question = questionMapper.selectByPrimaryKey(id);
-        User user = userMapper.findUserById(question.getCreator());
+        User user = userMapper.selectByPrimaryKey(Long.valueOf(question.getCreator().toString()));
         question.setUser(user);
         return question;
     }
@@ -68,5 +68,15 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void editQuestion(Question question) {
         questionMapper.updateByPrimaryKeySelective(question);
+    }
+
+    @Override
+    public void addViewCount(Question question) {
+        synchronized (this){
+            Question record = new Question();
+            record.setId(question.getId());
+            record.setViewCount(question.getViewCount()+1);
+            questionMapper.updateByPrimaryKeySelective(record);
+        }
     }
 }

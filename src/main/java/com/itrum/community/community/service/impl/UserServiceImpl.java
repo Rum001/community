@@ -27,7 +27,8 @@ public class UserServiceImpl implements UserService {
         UserExample example = new UserExample();
         example.createCriteria().andAccountIdEqualTo(accountId);
         List<User> users = userMapper.selectByExample(example);
-        return users.get(0);
+        if (users.size()!=0) return users.get(0);
+        return null;
     }
 
     @Override
@@ -35,6 +36,7 @@ public class UserServiceImpl implements UserService {
         UserExample example = new UserExample();
         example.createCriteria().andTokenEqualTo(token);
         List<User> users = userMapper.selectByExample(example);
-        return users.get(0);
+        if (users.size()!=0) return users.get(0);
+        return null;
     }
 }

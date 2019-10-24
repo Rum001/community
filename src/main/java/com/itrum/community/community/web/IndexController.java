@@ -2,6 +2,7 @@ package com.itrum.community.community.web;
 
 import com.github.pagehelper.PageInfo;
 import com.itrum.community.community.domain.Question;
+import com.itrum.community.community.domain.User;
 import com.itrum.community.community.dto.PagingDTO;
 import com.itrum.community.community.service.QuestionService;
 import com.itrum.community.community.service.UserService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -46,5 +48,16 @@ public class IndexController {
         model.addAttribute("questionList",questions);
         model.addAttribute("pagingDTO",pagingDTO);
         return "index";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response){
+        //清除session
+        request.getSession().removeAttribute("user");
+        //清除cookie
+        Cookie cookie = new Cookie("token",null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title th:text="${question.title}">码匠社区</title>
 </head>
 <body>
@@ -11,11 +11,77 @@
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <h3><span class="glyphicon" aria-hidden="true" th:text="${question.title}"></span></h3>
             <span class="text-color">
-                作者： <span th:text="${question.user.name}"></span> | 发布时间： <span th:text="${#dates.format(question.createTime,'yyyy-MM-dd')}"></span>| 阅读数： <span th:text="${question.viewCount}"></span> </span>
+                作者： <span th:text="${question.user.name}"></span> | 发布时间： <span
+                    th:text="${#dates.format(question.createTime,'yyyy-MM-dd')}"></span>| 阅读数： <span
+                    th:text="${question.viewCount}"></span> </span>
             <hr/>
             <span th:text="${question.description}" style="font-size: 14px"></span>
             <hr/>
-            <a th:href="@{'/question/editQuestion/'+${question.id}}" th:if="${session.user.id==question.creator} " class="common-edit"><span class="glyphicon glyphicon-pencil"></span>编辑</a>
+            <a th:href="@{'/question/editQuestion/'+${question.id}}" th:if="${session.user.id==question.creator} "
+               class="common-edit"><span class="glyphicon glyphicon-pencil"></span>编辑</a>
+            <hr/>
+            <div><h4><span th:text="${question.commentCount}"></span> 个回复</h4></div>
+            <hr/>
+            <ul class="media-list">
+                <li class="media" th:each="comment : ${comments}">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object image-size" th:src="${comment.user.avatarUrl}">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading" th:text="${comment.user.name}" style="padding-top: 3px"></h4>
+                        <span th:text="${comment.content}"></span>
+                        <div class="menus">
+                            <span class="glyphicon glyphicon-thumbs-up icon"></span>
+                            <span class="glyphicon glyphicon-comment icon" style="padding-left: 15px" id="icon-comment"
+                                  onclick="showSecondComment(this)" th:data-id="${comment.id}"></span>
+                            <span class="pull-right" th:text="${#dates.format(comment.createTime,'yyyy-MM-dd')}"
+                                  style="color: #999999"></span>
+                        </div>
+                        <div class="collapse second-comment" th:id="'comment-'+${comment.id}">
+                            <div class="media" th:each="secondComment : ${secondComments}">
+                                <div class="media-left">
+                                        <img class="media-object image-size" th:src="${secondComment.user.avatarUrl}">
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading" th:text="${secondComment.user.name}"
+                                        style="padding-top: 3px"></h4>
+                                    <span th:text="${secondComment.content}"></span>
+                                    <div class="menus">
+                                        <span class="pull-right" th:text="${#dates.format(secondComment.createTime,'yyyy-MM-dd')}"
+                                          style="color: #999999"></span>
+                                    </div>
+                                 </div>
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" placeholder="评论一下..." id="secondContent"
+                                       style="margin: 10px">
+                                <button type="submit" style="margin-top: 10px" class="btn btn-success btn-publish" onclick="secondComment()">评论
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>         '
+                </li>
+            </ul>
+            <div id="section" style="margin: 40px 0px">
+                <ul class="media-list">
+                    <li class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object image-size" th:src="${question.user.avatarUrl}">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading" th:text="${question.user.name}" style="padding-top: 10px"></h4>
+                        </div>
+                    </li>
+                </ul>
+                <input type="hidden" id="parentId" th:value="${question.id}"/>
+                <textarea class="form-control" rows="3" style="margin: 10px" id="content"></textarea>
+                <button type="submit" class="btn btn-success btn-publish" onclick="postComment()">回复</button>
+            </div>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <div>
@@ -24,11 +90,11 @@
                     <li class="media">
                         <div class="media-left">
                             <a href="#">
-                                <img class="media-object image-size" th:src="${question.user.avatarUrl}" >
+                                <img class="media-object image-size" th:src="${question.user.avatarUrl}">
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading" th:text="${question.user.name}" ></h4>
+                            <h4 class="media-heading" th:text="${question.user.name}" style="padding-top: 10px"></h4>
                         </div>
                     </li>
                 </ul>

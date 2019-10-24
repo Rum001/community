@@ -1,5 +1,6 @@
 package com.itrum.community.community.web;
 
+import com.itrum.community.community.domain.User;
 import com.itrum.community.community.dto.AccessTokenDTO;
 import com.itrum.community.community.dto.GithubUserDTO;
 import com.itrum.community.community.provider.GithubProvider;

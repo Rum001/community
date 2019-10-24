@@ -41,7 +41,7 @@
 
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.itrum.community.community.mapper"  targetProject="${project}">
         </javaClientGenerator>
-        <table tableName="question" domainObjectName="Question">
+        <table tableName="comment" domainObjectName="Comment">
             <generatedKey column="id" sqlStatement="MySql"/>
         </table>
     </context>
